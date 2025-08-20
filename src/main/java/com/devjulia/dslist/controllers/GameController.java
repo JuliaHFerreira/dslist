@@ -1,7 +1,6 @@
-package com.devjulia.dslist.Controllers;
+package com.devjulia.dslist.controllers;
 
 import com.devjulia.dslist.dto.GameMinDTO;
-import com.devjulia.dslist.entities.Game;
 import com.devjulia.dslist.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
