@@ -16,21 +16,25 @@ public class Game {
 
     @Column(name = "game_year") //Costumizando nome da coluna no banco para diferenciar de variavel padrão
     private Integer year;
-    private String genge;
-    private String platform;
+    private String genre;
+    private String platforms;
     private Double score;
     private String imgUrl;
+
+    @Column(columnDefinition = "TEXT") //Convertendo coluna para tipo text
     private String shortDescription;
+
+    @Column(columnDefinition = "TEXT") //Convertendo coluna para tipo text
     private String longDescription;
 
     public Game(){
     }
 
-    public Game(Long id, String title, Integer year, String genge, String imgUrl, String platforms, Double score, String shortDescription, String longDescription) {
+    public Game(Long id, String title, Integer year, String genre, String imgUrl, String platforms, Double score, String shortDescription, String longDescription) {
         this.id = id;
         this.title = title;
         this.year = year;
-        this.genge = genge;
+        this.genre = genre;
         this.imgUrl = imgUrl;
         this.platforms = platforms;
         this.score = score;
@@ -46,12 +50,12 @@ public class Game {
         this.score = score;
     }
 
-    public String getGenge() {
-        return genge;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setGenge(String genge) {
-        this.genge = genge;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public Long getId() {
