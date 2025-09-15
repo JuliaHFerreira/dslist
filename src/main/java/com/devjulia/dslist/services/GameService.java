@@ -8,31 +8,31 @@ import com.devjulia.dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 @Service
 public class GameService {
 
-    @Autowired //injetando
+    @Autowired
     private GameRepository gameRepository;
 
-    @Transactional (readOnly = true) //Fica transacional ACID -> Ele garante que o dado chegue inteiro na base | (ReadOnly = true) diz que a operação vai ser apenas leitura fazendo ser mais rapido
-    public GameDTO findById(Long id){
-        Game result = gameRepository.findById(id).get();
-        //fazer tratamento de exceções
+    @Transactional(readOnly = true)
+    public GameDTO findById(@PathVariable Long listId) {
+        Game result = gameRepository.findById(listId).get();
         return new GameDTO(result);
     }
-    @Transactional (readOnly = true)
+
+    @Transactional(readOnly = true)
     public List<GameMinDTO> findAll() {
         List<Game> result = gameRepository.findAll();
-        // List<GameMinDTO> dto = result.stream().map(x -> new GameMinDTO(x)).toList(); -> pode ser feito assim
-        return result.stream().map(x -> new GameMinDTO(x)).toList();
+        return result.stream().map(GameMinDTO::new).toList();
     }
 
-    @Transactional (readOnly = true)
-    public List<GameMinDTO> findByList(Long listId) {
-        List<GameMinProjection> result = gameRepository.searchByList(listId);
-        return result.stream().map(x -> new GameMinDTO(x)).toList();
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByGameList(Long listId) {
+        List<GameMinProjection> games = gameRepository.searchByList(listId);
+        return games.stream().map(GameMinDTO::new).toList();
     }
 }
